@@ -2,30 +2,30 @@
 
 AI-powered Q&A assistant for new software engineers. Ask questions about the codebase, processes, architecture, and dev setup — and get grounded answers with citations.
 
-Built with LangChain, Google Gemini, ChromaDB, and LangSmith tracing.
+Built with LangChain.js, Google Gemini, and LangSmith tracing.
 
 ## Architecture
 
 ```
 User Query
     → Embed query (text-embedding-004)
-    → Search child chunks in ChromaDB (200-token chunks)
-    → Retrieve full parent sections (1000-token chunks) [Parent Document Retrieval]
-    → Assemble context + prompt
-    → Gemini 1.5 Flash
+    → Cosine similarity search over child chunks (200-char chunks)
+    → Retrieve full parent sections (1000-char chunks) [Parent Document Retrieval]
+    → Assemble context + prompt (LCEL chain)
+    → Gemini 2.0 Flash
     → Cited answer
 ```
 
 ## Setup
 
-### 1. Install Python 3.10+
+### 1. Install Node.js 18+
 
-Verify with: `python --version`
+Verify with: `node --version`
 
 ### 2. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+npm install --registry https://registry.npmjs.org
 ```
 
 ### 3. Configure environment variables
@@ -37,7 +37,7 @@ cp .env.example .env
 ```
 
 Required keys:
-- `GOOGLE_API_KEY` — from Google AI Studio
+- `GOOGLE_API_KEY` — from Google AI Studio (aistudio.google.com/apikey)
 - `LANGCHAIN_API_KEY` — from LangSmith (smith.langchain.com)
 
 ### 4. Add your documents
@@ -47,15 +47,15 @@ Place `.md` or `.pdf` files in the `docs/` folder. Sample documents are included
 ### 5. Ingest documents
 
 ```bash
-python ingest.py
+npm run ingest
 ```
 
-This creates `chroma_db/` (vector index) and `parents.json` (parent chunks). Run again whenever you add new documents.
+This creates `vectorstore.json` (vector index) and `parents.json` (parent chunks). Run again whenever you add or update documents.
 
 ### 6. Start the assistant
 
 ```bash
-python app.py
+npm start
 ```
 
 ## Example Questions

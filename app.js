@@ -47,7 +47,7 @@ async function main() {
 
   const parentsMap = Object.fromEntries(parents.map(p => [p.id, p]));
   const embeddings = new GoogleGenerativeAIEmbeddings({ model: 'text-embedding-004' });
-  const llm = new ChatGoogleGenerativeAI({ model: 'gemini-1.5-flash', temperature: 0 });
+  const llm = new ChatGoogleGenerativeAI({ model: 'gemini-2.0-flash-lite', temperature: 0 });
   const chain = prompt.pipe(llm).pipe(new StringOutputParser());
 
   const rl = createInterface({ input: process.stdin, output: process.stdout });

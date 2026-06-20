@@ -1,0 +1,17 @@
+{
+  "name": "onboarding-assistant",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "ingest": "node ingest.js",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.0",
+    "@langchain/google-genai": "^0.1.0",
+    "@langchain/textsplitters": "^0.1.0",
+    "dotenv": "^16.4.5",
+    "glob": "^11.0.0",
+    "pdf-parse": "^1.1.1"
+  }
+}
